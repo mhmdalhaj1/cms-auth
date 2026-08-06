@@ -1,0 +1,576 @@
+/* ================================
+   GENERAL AUTHENTICATION PAGE
+================================ */
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.auth-page {
+  width: 100%;
+  min-height: 100vh;
+
+  background-color: #ffffff;
+}
+
+.auth-container {
+  width: 100%;
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-columns: 47% 53%;
+
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+
+/* ================================
+   LEFT WELCOME SECTION
+================================ */
+
+.auth-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 48px;
+
+  text-align: center;
+  color: #ffffff;
+
+  background:
+    radial-gradient(
+      circle at 80% 8%,
+      rgba(255, 0, 35, 0.3),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 8% 92%,
+      rgba(255, 0, 35, 0.12),
+      transparent 18%
+    ),
+    #210d11;
+}
+
+.auth-welcome-title {
+  margin: 0 0 20px;
+
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.auth-highlight {
+  color: #f51b2d;
+}
+
+.auth-welcome-description {
+  width: 100%;
+  max-width: 480px;
+
+  margin: 0;
+
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+
+/* ================================
+   RIGHT FORM SECTION
+================================ */
+
+.auth-form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 48px;
+
+  background-color: #ffffff;
+}
+
+
+/* ================================
+   FORM CARD
+================================ */
+
+.auth-form {
+  width: 100%;
+  max-width: 410px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  padding: 34px;
+
+  border: 1px solid #dfe3e8;
+  border-radius: 20px;
+
+  background-color: #ffffff;
+
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ================================
+   FORM HEADER
+================================ */
+
+.auth-form-header {
+  margin-bottom: 4px;
+
+  text-align: center;
+}
+
+.auth-form-header h2 {
+  margin: 0 0 10px;
+
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+
+  color: #1d2433;
+}
+
+.auth-form-header p {
+  margin: 0;
+
+  font-size: 13px;
+  line-height: 1.4;
+
+  color: #667085;
+}
+
+
+/* ================================
+   NORMAL FORM FIELDS
+================================ */
+
+.form-field {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 500;
+
+  color: #202733;
+}
+
+.form-input {
+  width: 100%;
+  height: 44px;
+
+  padding: 0 13px;
+
+  border: 1px solid #d5dae1;
+  border-radius: 6px;
+
+  background-color: #ffffff;
+  color: #1d2433;
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-input::placeholder {
+  color: #a7aeba;
+}
+
+.form-input:focus {
+  border-color: #f51b2d;
+  outline: none;
+
+  box-shadow: 0 0 0 3px rgba(245, 27, 45, 0.08);
+}
+
+
+/* ================================
+   VALIDATION ERRORS
+================================ */
+
+.form-input-error {
+  border-color: #d8001d;
+}
+
+.form-input-error:focus {
+  border-color: #d8001d;
+
+  box-shadow: 0 0 0 3px rgba(216, 0, 29, 0.08);
+}
+
+.form-error-message {
+  margin: 0;
+
+  font-size: 11px;
+  line-height: 1.3;
+
+  color: #d8001d;
+}
+
+
+/* ================================
+   PASSWORD FIELD
+================================ */
+
+.password-input-wrapper {
+  width: 100%;
+
+  position: relative;
+}
+
+.password-input {
+  padding-right: 65px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+
+  transform: translateY(-50%);
+
+  padding: 3px;
+
+  border: none;
+  background-color: transparent;
+
+  font-size: 11px;
+  color: #7d8591;
+
+  cursor: pointer;
+}
+
+.password-toggle:hover {
+  color: #f51b2d;
+}
+
+
+/* ================================
+   LOGIN OPTIONS
+================================ */
+
+.auth-options {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  font-size: 12px;
+}
+
+.remember-option {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  font-size: 12px;
+  color: #394150;
+
+  cursor: pointer;
+}
+
+.remember-option input {
+  width: 14px;
+  height: 14px;
+
+  margin: 0;
+
+  accent-color: #f51b2d;
+  cursor: pointer;
+}
+
+.text-button {
+  padding: 0;
+
+  border: none;
+  background-color: transparent;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  color: #ed001c;
+
+  cursor: pointer;
+}
+
+.text-button:hover {
+  text-decoration: underline;
+}
+
+
+/* ================================
+   PRIMARY RED BUTTON
+================================ */
+
+.primary-button {
+  width: 100%;
+  height: 44px;
+
+  border: none;
+  border-radius: 6px;
+
+  background-color: #f51b2d;
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.primary-button:hover {
+  background-color: #d91427;
+}
+
+.primary-button:active {
+  transform: scale(0.99);
+}
+
+
+/* ================================
+   SEPARATOR
+================================ */
+
+.auth-separator {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.auth-separator span {
+  flex: 1;
+  height: 1px;
+
+  background-color: #e1e4e8;
+}
+
+.auth-separator p {
+  margin: 0;
+
+  font-size: 12px;
+
+  color: #7f8792;
+}
+
+
+/* ================================
+   GOOGLE BUTTON
+================================ */
+
+.google-button {
+  width: 100%;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  border: 1px solid #d5dae1;
+  border-radius: 6px;
+
+  background-color: #ffffff;
+  color: #252b35;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+.google-button:hover {
+  background-color: #f8f9fa;
+}
+
+.google-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+
+/* ================================
+   BOTTOM LOGIN / SIGN-UP LINK
+================================ */
+
+.auth-switch-text {
+  margin: 2px 0 0;
+
+  text-align: center;
+
+  font-size: 12px;
+  line-height: 1.4;
+
+  color: #333b48;
+}
+
+.auth-red-link {
+  color: #f51b2d;
+  font-weight: 500;
+}
+
+.auth-red-link:hover {
+  text-decoration: underline;
+}
+
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 900px) {
+  .auth-container {
+    grid-template-columns: 43% 57%;
+  }
+
+  .auth-welcome {
+    padding: 32px;
+  }
+
+  .auth-welcome-title {
+    font-size: 34px;
+  }
+
+  .auth-welcome-description {
+    font-size: 14px;
+  }
+
+  .auth-form-panel {
+    padding: 32px;
+  }
+
+  .auth-form {
+    padding: 28px;
+  }
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 768px) {
+  .auth-container {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: visible;
+  }
+
+  .auth-welcome {
+    min-height: 270px;
+
+    justify-content: flex-start;
+
+    padding: 55px 24px 80px;
+  }
+
+  .auth-welcome-title {
+    margin-bottom: 16px;
+
+    font-size: 30px;
+  }
+
+  .auth-welcome-description {
+    max-width: 340px;
+
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .auth-form-panel {
+    flex: 1;
+
+    align-items: flex-start;
+
+    margin-top: -35px;
+    padding: 0 20px 40px;
+
+    border-radius: 24px 24px 0 0;
+
+    position: relative;
+    z-index: 1;
+  }
+
+  .auth-form {
+    width: 100%;
+    max-width: 430px;
+
+    margin: 0 auto;
+    padding: 30px 24px;
+
+    border: none;
+    border-radius: 24px 24px 0 0;
+
+    box-shadow: none;
+  }
+}
+
+
+/* ================================
+   SMALL MOBILE
+================================ */
+
+@media (max-width: 420px) {
+  .auth-welcome {
+    min-height: 245px;
+
+    padding: 42px 20px 70px;
+  }
+
+  .auth-welcome-title {
+    font-size: 27px;
+  }
+
+  .auth-form-panel {
+    margin-top: -30px;
+    padding: 0 14px 30px;
+  }
+
+  .auth-form {
+    padding: 26px 18px;
+    gap: 14px;
+  }
+
+  .auth-form-header h2 {
+    font-size: 21px;
+  }
+
+  .auth-options {
+    gap: 10px;
+  }
+
+  .text-button,
+  .remember-option,
+  .auth-switch-text {
+    font-size: 11px;
+  }
+}
