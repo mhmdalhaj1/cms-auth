@@ -10,6 +10,9 @@ function containsUppercase(password){
 function containSpecialChar(password){
   return /[!@#$%^&*]/.test(password);
 }
+function containNumbers(password){
+  return /[0-9]/.test(password);
+}
 
 export function validateLogin(formData) {
   const errors = {};
@@ -49,6 +52,8 @@ export function validateSignUp(formData) {
     errors.password = "Password must contain special  characters  ex.!@#$%^&*";
   } else if(!containsUppercase(formData.password)){
     errors.password = "Password  must contain Uppercase  character."
+  }  else  if (!containNumbers(formData.password)){
+    errors.password = "Password must contain numbers";
   }
 
   return errors;

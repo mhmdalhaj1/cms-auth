@@ -1,42 +1,47 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router";
-import { validateLogin } from "../../utils/authValidation";
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "../../schemas/authSchemas";
+import { useState } from "react";
+import { loginUser } from "../../services/authService";
 import AuthLayout from "../../components/auth/AuthLayout";
 import FormField from "../../components/auth/FormField";
 import PasswordField from "../../components/auth/PasswordField";
 
 function LoginPage() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    rememberMe: false,
+
+  const [apiError, setApiError] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+  } = useForm({
+    resolver: yupResolver(loginSchema),
   });
 
-  const [errors, setErrors] = useState({});
+  async function onSubmit(data) {
+  try {
+    setApiError("");
 
-  function handleChange(event) {
-    const { name, value, type, checked } = event.target;
+    const response = await loginUser({
+      email: data.email,
+      password: data.password,
+    });
 
-    setFormData((currentData) => ({
-      ...currentData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    console.log("Login successful");
+    console.log(response.data);
+
+  } catch (error) {
+    console.error("Login error:", error);
+
+    setApiError(
+      error.response?.data?.error ||
+      error.response?.data?.message ||
+      "Invalid email or password"
+    );
   }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    const validationErrors = validateLogin(formData);
-
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length > 0) {
-      return;
-    }
-
-    console.log("Valid login data:", formData);
-  }
+}
 
   return (
     <AuthLayout
@@ -44,7 +49,10 @@ function LoginPage() {
       highlightedText="Back"
       description="Sign in to access your enterprise dashboard, manage operations, and collaborate securely across your digital ecosystem."
     >
-      <form className="auth-form" onSubmit={handleSubmit}>
+      <form
+        className="auth-form"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <header className="auth-form-header">
           <h2>Sign In</h2>
           <p>Enter your credentials to access your account</p>
@@ -55,44 +63,55 @@ function LoginPage() {
           name="email"
           type="email"
           placeholder="Enter your email"
-          value={formData.email}
-          onChange={handleChange}
-          error={errors.email}
+          register={register}
+          error={errors.email?.message}
         />
 
         <PasswordField
           label="Password"
           name="password"
           placeholder="Enter your password"
-          value={formData.password}
-          onChange={handleChange}
-          error={errors.password}
+          register={register}
+          error={errors.password?.message}
         />
 
         <div className="auth-options">
-          <label className="remember-option">
-            <input
-              type="checkbox"
-              name="rememberMe"
-              checked={formData.rememberMe}
-              onChange={handleChange}
-            />
+  <label className="remember-option">
+    <input
+      type="checkbox"
+      {...register("rememberMe")}
+    />
 
-            <span>Remember me</span>
-          </label>
+    <span>Remember me</span>
+  </label>
 
-          <button className="text-button" type="button">
-            Can’t access my account
-          </button>
-        </div>
+  <button
+    className="text-button"
+    type="button"
+  >
+    Can’t access my account
+  </button>
+</div>
 
-        <button className="primary-button" type="submit">
-          Sign In
-        </button>
+{apiError && (
+  <p className="form-error-message">
+    {apiError}
+  </p>
+)}
+
+<button
+  className="primary-button"
+  type="submit"
+>
+  Sign In
+</button>
 
         <p className="auth-switch-text">
           Don’t have an account?{" "}
-          <Link className="auth-red-link" to="/signup">
+          <Link
+            className="auth-red-link"
+            to="/signup"
+          >
             Create an Account
           </Link>
         </p>
