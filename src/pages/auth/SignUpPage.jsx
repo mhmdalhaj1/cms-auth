@@ -1,44 +1,26 @@
-import { useState } from "react";
 import { Link } from "react-router";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import googleLogo from "../../assets/images/google-logo.jpeg";
-
 import AuthLayout from "../../components/auth/AuthLayout";
 import FormField from "../../components/auth/FormField";
 import PasswordField from "../../components/auth/PasswordField";
-import { validateSignUp } from "../../utils/authValidation";
+import { signUpSchema } from "../../schemas/authSchemas";
 
 function SignUpPage() {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    rememberMe: false,
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(signUpSchema),
   });
 
-  const [errors, setErrors] = useState({});
+  function onSubmit(data) {
+    console.log("Valid sign-up data:", data);
 
-  function handleChange(event) {
-    const { name, value, type, checked } = event.target;
-
-    setFormData((currentData) => ({
-      ...currentData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    const validationErrors = validateSignUp(formData);
-
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length > 0) {
-      return;
-    }
-
-    console.log("Valid sign-up data:", formData);
+    // Later we can call the signup API here with Axios.
   }
 
   return (
@@ -48,7 +30,7 @@ function SignUpPage() {
     >
       <form
         className="auth-form auth-card"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <header className="auth-form-header">
           <h2>Sign Up</h2>
@@ -60,9 +42,8 @@ function SignUpPage() {
           name="fullName"
           type="text"
           placeholder="Enter your name"
-          value={formData.fullName}
-          onChange={handleChange}
-          error={errors.fullName}
+          register={register}
+          error={errors.fullName?.message}
         />
 
         <FormField
@@ -70,28 +51,23 @@ function SignUpPage() {
           name="email"
           type="email"
           placeholder="Enter your email"
-          value={formData.email}
-          onChange={handleChange}
-          error={errors.email}
+          register={register}
+          error={errors.email?.message}
         />
 
         <PasswordField
           label="Password"
           name="password"
           placeholder="Enter your password"
-          value={formData.password}
-          onChange={handleChange}
-          error={errors.password}
+          register={register}
+          error={errors.password?.message}
         />
 
         <label className="remember-option">
           <input
             type="checkbox"
-            name="rememberMe"
-            checked={formData.rememberMe}
-            onChange={handleChange}
+            {...register("rememberMe")}
           />
-
           <span>Remember me</span>
         </label>
 
@@ -106,14 +82,14 @@ function SignUpPage() {
         </div>
 
         <button className="google-button" type="button">
-  <span>Continue with Google</span>
+          <span>Continue with Google</span>
 
-  <img
-    className="google-icon"
-    src={googleLogo}
-    alt=""
-  />
-</button>
+          <img
+            className="google-icon"
+            src={googleLogo}
+            alt="Google"
+          />
+        </button>
 
         <p className="auth-switch-text">
           Already have an account?{" "}
